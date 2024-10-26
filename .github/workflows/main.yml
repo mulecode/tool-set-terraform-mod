@@ -1,0 +1,78 @@
+name: Main
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+
+  prepare_versioning:
+    name: Prepare Versioning
+    uses: mulecode/actions-workflow-templates/.github/workflows/workflow-versioning-prepare.yml@main
+    with:
+      configFilePath: vertere.yml
+
+  build:
+    name: Build and Publish docker images
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Determine Changes
+        id: check_changes
+        run: |
+          FOLDER_PATH="docker/terraform-mod"
+          if git diff --quiet ${{ github.sha }}^! -- "$FOLDER_PATH"; then
+            echo "No changes detected in $FOLDER_PATH"
+            echo "CHANGED=FALSE" >> $GITHUB_ENV
+          else
+            echo "Detected changes in $FOLDER_PATH"
+            echo "CHANGED=TRUE" >> $GITHUB_ENV
+          fi
+      - name: Github Docker login
+        env:
+          # GitHub will generate the token for the actor
+          GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
+        run: |
+          make docker_login
+      - name: Build Docker Image
+        if: ${{ env.CHANGED == 'TRUE' }}
+        run: |
+          echo "Building docker image terraform-mod"
+          make docker_build IMAGE=terraform-mod TAG=${{ github.sha }}
+          make docker_tag IMAGE=terraform-mod TAG=${{ github.sha }} NEW_TAG=latest
+      - name: Push Docker Image
+        if: ${{ env.CHANGED == 'TRUE' }}
+        run: |
+          echo "Pushing docker image terraform-mod"
+          make docker_push IMAGE=terraform-mod TAG=${{ github.sha }}
+          make docker_push IMAGE=terraform-mod TAG=latest
+
+  artefact_versioning:
+    name: Artefact versioning
+    uses: mulecode/actions-workflow-templates/.github/workflows/workflow-docker-tag.yml@main
+    needs:
+      - prepare_versioning
+      - build
+    with:
+      dockerImage: ghcr.io/mulecode/tool-set-terraform-mod
+      dockerTag: ${{ github.sha }}
+      dockerNewTag: ${{ needs.prepare_versioning.outputs.nextVersion }}
+    secrets:
+      dockerUsername: ${{ github.actor }}
+      dockerPassword: ${{ secrets.GITHUB_TOKEN }}
+
+  release:
+    name: Release version
+    uses: mulecode/actions-workflow-templates/.github/workflows/workflow-release.yml@main
+    needs:
+      - prepare_versioning
+      - artefact_versioning
+    with:
+      changelogPath: CHANGELOG.md
+      nextVersion: ${{ needs.prepare_versioning.outputs.nextVersion }}
+    secrets:
+      githubToken: ${{ secrets.GITHUB_TOKEN }}
