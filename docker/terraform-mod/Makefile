@@ -67,7 +67,7 @@ destroy: ## Terraform destroy
 
 .PHONY: apply
 apply: ## Terraform apply
-	@TF_DATA_DIR="$(TERRAFORM_CONFIG_DIR)/.terraform" terraform -chdir=$(TERRAFORM_MODULE) apply "$(TERRAFORM_CONFIG_DIR)/build.plan"
+	@TF_DATA_DIR="$(TERRAFORM_CONFIG_DIR)/.terraform" terraform -chdir=$(TERRAFORM_MODULE) apply "$(TERRAFORM_PLAN_DIR)/build.plan"
 
 ####################################################################################
 ##@ Utils
