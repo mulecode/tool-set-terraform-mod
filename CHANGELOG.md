@@ -1,3 +1,11 @@
+## 🚀 [2.0.1] - 26/10/2024
+
+### 🛠️ Fixes
+
+- Fix the plan path when terraform apply
+
+---
+
 ## 🚀 [2.0.0] - 26/10/2024
 
 ### ✅ New Features
