@@ -1,0 +1,33 @@
+########################################################
+## Config for vertere https://pypi.org/project/vertere/
+## vertere 1.1.0 - Semantic Versioning CLI tool
+########################################################
+versioning:
+########################################################
+## After vertere is initialized,
+## the initial-version property is ignored and can comment out.
+########################################################
+  initial-version: 2.0.0
+
+########################################################
+## Prefix the tag with a value, example: v1.0.0
+########################################################
+#  prefix: v
+
+########################################################
+## Postfix the tag with a value, examples:
+#  v1.0.0-BUILD-SNAPSHOT
+#  v1.0.0-M
+#  v1.0.0-RC
+#  v1.0.0-RELEASE
+########################################################
+#  postfix: RC
+
+########################################################
+## Variable to control the semantic change, examples
+## MAJOR - When breaking changes are introduced
+## MINOR - When new features are introduced
+## PATCH - When bug fixes and minor improvements are introduced
+## Also deterministic by the engineer judgement
+########################################################
+  incrementer: PATCH

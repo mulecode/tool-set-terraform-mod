@@ -1,0 +1,23 @@
+name: Pull Request
+
+on:
+  pull_request:
+    types: [ opened, edited, synchronize, labeled, unlabeled ]
+
+jobs:
+
+  lint_validate:
+    name: Docker Lint
+    uses: mulecode/actions-workflow-templates/.github/workflows/workflow-docker-lint.yml@main
+    with:
+      dockerfilePath: ./docker/terraform-mod/Dockerfile
+
+  vulnerabilities_scan:
+    name: Docker Vulnerability Scan
+    uses: mulecode/actions-workflow-templates/.github/workflows/workflow-docker-vulnerability-scan.yml@main
+    with:
+      dockerImage: ghcr.io/mulecode/tool-set-terraform-mod:${{ github.sha }}
+      dockerfileDir: ./docker/terraform-mod
+      policyPath: ./docker/terraform-mod/.snyk
+    secrets:
+      SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
