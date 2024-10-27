@@ -1,3 +1,11 @@
+## 🚀 [2.2.2] - 27/10/2024
+
+### 🛠️ Fixes
+
+- Add missing variables for dynamoDB table module
+
+---
+
 ## 🚀 [2.2.1] - 27/10/2024
 
 ### 🛠️ Fixes
