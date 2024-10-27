@@ -30,4 +30,4 @@ versioning:
 ## PATCH - When bug fixes and minor improvements are introduced
 ## Also deterministic by the engineer judgement
 ########################################################
-  incrementer: PATCH
+  incrementer: MINOR
