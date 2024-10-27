@@ -42,7 +42,7 @@ variable "aws_lambda_functions" {
   default = null
 }
 variable "aws_api_gateways" {
-  description = "Aws API Gateways configurations"
+  description = "AWS API Gateways configurations"
   type = map(object({
     description                  = string
     disable_execute_api_endpoint = optional(bool, false)
@@ -57,6 +57,27 @@ variable "aws_api_gateways" {
       throttle_burst_limit = optional(number, 10)
       throttle_rate_limit  = optional(number, 20)
     })), null)
+  }))
+  default = null
+}
+variable "aws_dynamodb_tables" {
+  description = "AWS DynamoDB tables configurations"
+  type = map(object({
+    billing_mode = string
+    hash_key     = string
+    attribute = list(object({
+      name = string
+      type = string
+    }))
+    global_secondary_index = optional(list(object({
+      name            = string
+      hash_key        = string
+      projection_type = string
+    })), [])
+    ttl = optional(list(object({
+      attribute_name = string
+      enabled        = bool
+    })), [])
   }))
   default = null
 }

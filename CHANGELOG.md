@@ -1,3 +1,11 @@
+## 🚀 [2.2.0] - 27/10/2024
+
+### ✅ New Features
+
+- add aws dynamodb table module
+
+---
+
 ## 🚀 [2.1.1] - 27/10/2024
 
 ### 🛠️ Fixes
