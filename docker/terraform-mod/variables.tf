@@ -90,12 +90,12 @@ variable "aws_dynamodb_tables" {
       projection_type    = string
       range_key          = string
     })), [])
-    timeouts = optional(object({
+    timeouts = optional(set(object({
       create = string
       delete = string
       update = string
-    }), null)
-    ttl = optional(list(object({
+    })), [])
+    ttl = optional(set(object({
       attribute_name = string
       enabled        = bool
     })), [])

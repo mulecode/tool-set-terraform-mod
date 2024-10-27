@@ -1,3 +1,11 @@
+## 🚀 [2.2.3] - 27/10/2024
+
+### 🛠️ Fixes
+
+- Adjust dynamodb timeout variable
+
+---
+
 ## 🚀 [2.2.2] - 27/10/2024
 
 ### 🛠️ Fixes
