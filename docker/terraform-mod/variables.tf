@@ -63,17 +63,38 @@ variable "aws_api_gateways" {
 variable "aws_dynamodb_tables" {
   description = "AWS DynamoDB tables configurations"
   type = map(object({
-    billing_mode = string
-    hash_key     = string
+    billing_mode     = string
+    hash_key         = string
+    range_key        = string
+    read_capacity    = optional(number, null)
+    write_capacity   = optional(number, null)
+    stream_enabled   = optional(bool, false)
+    stream_view_type = optional(string, null)
+    tags             = optional(map(string), {})
     attribute = list(object({
       name = string
       type = string
     }))
-    global_secondary_index = optional(list(object({
-      name            = string
-      hash_key        = string
-      projection_type = string
+    global_secondary_index = optional(set(object({
+      hash_key           = string
+      name               = string
+      non_key_attributes = optional(list(string), null)
+      projection_type    = string
+      range_key          = optional(string, null)
+      read_capacity      = optional(number, null)
+      write_capacity     = optional(number, null)
     })), [])
+    local_secondary_index = optional(set(object({
+      name               = string
+      non_key_attributes = list(string)
+      projection_type    = string
+      range_key          = string
+    })), [])
+    timeouts = optional(object({
+      create = string
+      delete = string
+      update = string
+    }), null)
     ttl = optional(list(object({
       attribute_name = string
       enabled        = bool

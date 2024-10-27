@@ -1,3 +1,11 @@
+## 🚀 [2.2.1] - 27/10/2024
+
+### 🛠️ Fixes
+
+- Fix dynamoDB table variables
+
+---
+
 ## 🚀 [2.2.0] - 27/10/2024
 
 ### ✅ New Features
