@@ -1,3 +1,11 @@
+## 🚀 [2.1.1] - 27/10/2024
+
+### 🛠️ Fixes
+
+- Fix terraform variable types for aws-api-gateway module
+
+---
+
 ## 🚀 [2.1.0] - 27/10/2024
 
 ### 🔄 Enhancements

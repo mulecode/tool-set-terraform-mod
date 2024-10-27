@@ -7,11 +7,11 @@ variable "account_id" {
   type        = string
 }
 variable "project_prefix" {
-  description = "Project prefix"
+  description = "Project prefix - prefix for all resources"
   type        = string
 }
 variable "aws_iam_policies" {
-  description = "IAM policies"
+  description = "AWS IAM policies configurations"
   type = map(object({
     description = string
     policy      = string
@@ -19,7 +19,7 @@ variable "aws_iam_policies" {
   default = null
 }
 variable "aws_iam_roles" {
-  description = "IAM Roles"
+  description = "AWS IAM Roles configurations"
   type = map(object({
     description                  = string
     assume_role_policy           = string
@@ -28,7 +28,7 @@ variable "aws_iam_roles" {
   default = null
 }
 variable "aws_lambda_functions" {
-  description = "Lambda functions"
+  description = "AWS Lambda functions configurations"
   type = map(object({
     description           = string
     handler               = string
@@ -42,22 +42,21 @@ variable "aws_lambda_functions" {
   default = null
 }
 variable "aws_api_gateways" {
-  description = "Lambda functions"
+  description = "Aws API Gateways configurations"
   type = map(object({
     description                  = string
     disable_execute_api_endpoint = optional(bool, false)
     api_body                     = string
     api_body_params              = optional(map(string), {})
     custom_domain                = optional(any)
-    quota = optional(object({
-      product_code         = string
+    quotas = optional(map(object({
       enable_api_key       = bool
       quota_limit          = optional(number, 500)
       quota_offset         = optional(number, 2)
       quota_period         = optional(string, "WEEK")
       throttle_burst_limit = optional(number, 10)
       throttle_rate_limit  = optional(number, 20)
-    }), null)
+    })), null)
   }))
   default = null
 }
