@@ -28,17 +28,16 @@ variable "disable_execute_api_endpoint" {
   type        = bool
   default     = false
 }
-variable "quota" {
+variable "quotas" {
   description = "Api Gateway quota settings"
-  type = object({
-    product_code         = string
+  type = map(object({
     enable_api_key       = optional(bool, false)
     quota_limit          = optional(number, 20)
     quota_offset         = optional(number, 2)
     quota_period         = optional(string, "WEEK")
     throttle_burst_limit = optional(number, 5)
     throttle_rate_limit  = optional(number, 10)
-  })
+  }))
   default = null
 }
 variable "custom_domain" {

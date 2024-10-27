@@ -1,3 +1,11 @@
+## 🚀 [2.1.0] - 27/10/2024
+
+### 🔄 Enhancements
+
+- Enable multi quotas for api gateway
+
+---
+
 ## 🚀 [2.0.1] - 26/10/2024
 
 ### 🛠️ Fixes
