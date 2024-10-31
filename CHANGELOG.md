@@ -1,3 +1,13 @@
+## 🚀 [2.3.0] - 31/10/2024
+
+### 🔄 Enhancements
+
+- Update terraform version 1.9.8
+- Update hashicorp/aws provider version 5.74.0
+- Add templating for aws policy module
+
+---
+
 ## 🚀 [2.2.3] - 27/10/2024
 
 ### 🛠️ Fixes

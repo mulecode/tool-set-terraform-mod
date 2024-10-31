@@ -15,6 +15,7 @@ variable "aws_iam_policies" {
   type = map(object({
     description = string
     policy      = string
+    policy_vars = optional(map(string), {})
   }))
   default = null
 }
