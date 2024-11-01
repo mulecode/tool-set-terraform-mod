@@ -1,0 +1,12 @@
+# .snyk
+# https://docs.snyk.io/snyk-cli/commands/ignore
+
+ignore:
+  SNYK-GOLANG-GITHUBCOMHASHICORPCONSULAPI-8310963:
+    - '*':
+        reason: "Wont affect the project"
+        expires: "2025-12-31T23:59:59Z"
+  SNYK-GOLANG-GITHUBCOMHASHICORPCONSULAPI-8310965:
+    - '*':
+        reason: "Wont affect the project"
+        expires: "2025-12-31T23:59:59Z"

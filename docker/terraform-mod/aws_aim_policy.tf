@@ -4,5 +4,5 @@ module "aws_aim_policy" {
   prefix      = var.project_prefix
   name        = each.key
   description = each.value.description
-  policy      = file(each.value.policy)
+  policy      = templatefile(each.value.policy, each.value.policy_vars)
 }
