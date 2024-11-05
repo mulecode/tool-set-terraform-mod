@@ -103,3 +103,20 @@ variable "aws_dynamodb_tables" {
   }))
   default = null
 }
+variable "aws_s3_buckets" {
+  description = "AWS S3 bucket configurations"
+  type = map(object({
+    acl        = optional(string, "private")
+    versioning = optional(string, "Disabled")
+    tags       = optional(map(string), {})
+  }))
+  default = null
+}
+variable "aws_s3_bucket_policies" {
+  description = "AWS S3 bucket policy configurations"
+  type = map(object({
+    policy      = string
+    policy_vars = optional(map(string), {})
+  }))
+  default = null
+}
