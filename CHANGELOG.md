@@ -1,3 +1,12 @@
+## 🚀 [2.4.0] - 05/11/2024
+
+### ✅ New Features
+
+- S3 bucket module
+- S3 bucket policy module
+
+---
+
 ## 🚀 [2.3.0] - 31/10/2024
 
 ### 🔄 Enhancements

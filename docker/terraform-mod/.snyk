@@ -10,3 +10,7 @@ ignore:
     - '*':
         reason: "Wont affect the project"
         expires: "2025-12-31T23:59:59Z"
+  SNYK-GOLANG-GITHUBCOMGOLANGJWTJWTV4-8341242:
+    - '*':
+        reason: "Wont affect the project"
+        expires: "2025-12-31T23:59:59Z"
