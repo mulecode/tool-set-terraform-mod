@@ -1,6 +1,6 @@
 FROM hashicorp/terraform:1.9.8
 
-LABEL org.opencontainers.image.source = "https://github.com/mulecode/tool-set-terraform-mod"
+LABEL org.opencontainers.image.source="https://github.com/mulecode/tool-set-terraform-mod"
 LABEL org.opencontainers.image.description="Terraform 1.9.8 Tool-set"
 
 WORKDIR /opt/terraform

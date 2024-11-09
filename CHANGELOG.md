@@ -1,3 +1,11 @@
+## 🚀 [2.4.4] - 09/11/2024
+
+### 🛠️ Fixes
+
+- Ensure all modules are optional maps instead of default null
+
+---
+
 ## 🚀 [2.4.3] - 09/11/2024
 
 ### 🛠️ Fixes

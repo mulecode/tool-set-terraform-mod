@@ -17,7 +17,7 @@ variable "aws_iam_policies" {
     policy      = string
     policy_vars = optional(map(string), {})
   }))
-  default = null
+  default = {}
 }
 variable "aws_iam_roles" {
   description = "AWS IAM Roles configurations"
@@ -26,7 +26,7 @@ variable "aws_iam_roles" {
     assume_role_policy           = string
     aim_attachment_role_policies = list(string)
   }))
-  default = null
+  default = {}
 }
 variable "aws_lambda_functions" {
   description = "AWS Lambda functions configurations"
@@ -40,7 +40,7 @@ variable "aws_lambda_functions" {
     permissions           = optional(list(any), [])
     layers                = optional(list(string), [])
   }))
-  default = null
+  default = {}
 }
 variable "aws_api_gateways" {
   description = "AWS API Gateways configurations"
@@ -59,7 +59,7 @@ variable "aws_api_gateways" {
       throttle_rate_limit  = optional(number, 20)
     })), null)
   }))
-  default = null
+  default = {}
 }
 variable "aws_dynamodb_tables" {
   description = "AWS DynamoDB tables configurations"
@@ -101,7 +101,7 @@ variable "aws_dynamodb_tables" {
       enabled        = bool
     })), [])
   }))
-  default = null
+  default = {}
 }
 variable "aws_s3_buckets" {
   description = "AWS S3 bucket configurations"
@@ -110,7 +110,7 @@ variable "aws_s3_buckets" {
     versioning = optional(string, "Disabled")
     tags       = optional(map(string), {})
   }))
-  default = null
+  default = {}
 }
 variable "aws_s3_bucket_policies" {
   description = "AWS S3 bucket policy configurations"
@@ -118,5 +118,5 @@ variable "aws_s3_bucket_policies" {
     policy      = string
     policy_vars = optional(map(string), {})
   }))
-  default = null
+  default = {}
 }
