@@ -1,3 +1,11 @@
+## 🚀 [2.4.3] - 09/11/2024
+
+### 🛠️ Fixes
+
+- Fix S3 bucket policy module for variables templating
+
+---
+
 ## 🚀 [2.4.1] - 09/11/2024
 
 ### 🛠️ Fixes
