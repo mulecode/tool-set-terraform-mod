@@ -3,7 +3,7 @@ locals {
     for bucket_name, config in var.aws_s3_buckets_put_files : [
       for file in fileset(config.folder_path, "**/*.*") : {
         bucket_name = bucket_name
-        bucket_id   = "${bucket_name}-${var.account_id}"
+        bucket_id   = "${var.project_prefix}-${bucket_name}-${var.account_id}"
         file_path   = "${config.folder_path}/${file}"
         key         = file
         tags        = config.tags

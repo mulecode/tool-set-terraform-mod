@@ -1,3 +1,11 @@
+## 🚀 [2.5.1] - 09/11/2024
+
+### 🛠️ Fixes
+
+- Fix S3 bucket put file module with project prefix
+
+---
+
 ## 🚀 [2.5.0] - 09/11/2024
 
 ### ✅ New Features
