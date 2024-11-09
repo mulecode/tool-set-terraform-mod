@@ -1,3 +1,11 @@
+## 🚀 [2.4.1] - 09/11/2024
+
+### 🛠️ Fixes
+
+- Lint S3 bucket policy module
+
+---
+
 ## 🚀 [2.4.0] - 05/11/2024
 
 ### ✅ New Features

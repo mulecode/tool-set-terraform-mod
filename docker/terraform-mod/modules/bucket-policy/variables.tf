@@ -9,6 +9,6 @@ variable "policy" {
 }
 variable "policy_vars" {
   description = "Variables to be used in the policy document"
-  type         = optional(map(string), {})
+  type        = optional(map(string), {})
   default     = {}
 }
