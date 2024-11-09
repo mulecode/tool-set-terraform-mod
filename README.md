@@ -124,7 +124,9 @@ Check for more patterns at [3musketeers](https://3musketeers.pages.dev)
 
 ## Providers
 
-No providers.
+| Name | Version |
+|------|---------|
+| <a name="provider_aws"></a> [aws](#provider\_aws) | ~> 5.74.0 |
 
 ## Modules
 
@@ -140,7 +142,9 @@ No providers.
 
 ## Resources
 
-No resources.
+| Name | Type |
+|------|------|
+| [aws_s3_object.upload_files](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/s3_object) | resource |
 
 ## Inputs
 
@@ -154,6 +158,7 @@ No resources.
 | <a name="input_aws_lambda_functions"></a> [aws\_lambda\_functions](#input\_aws\_lambda\_functions) | AWS Lambda functions configurations | <pre>map(object({<br/>    description           = string<br/>    handler               = string<br/>    runtime               = optional(string, "python3.9")<br/>    artefact_path         = string<br/>    role_arn              = string<br/>    environment_variables = optional(map(string), {})<br/>    permissions           = optional(list(any), [])<br/>    layers                = optional(list(string), [])<br/>  }))</pre> | `{}` | no |
 | <a name="input_aws_s3_bucket_policies"></a> [aws\_s3\_bucket\_policies](#input\_aws\_s3\_bucket\_policies) | AWS S3 bucket policy configurations | <pre>map(object({<br/>    policy      = string<br/>    policy_vars = optional(map(string), {})<br/>  }))</pre> | `{}` | no |
 | <a name="input_aws_s3_buckets"></a> [aws\_s3\_buckets](#input\_aws\_s3\_buckets) | AWS S3 bucket configurations | <pre>map(object({<br/>    acl        = optional(string, "private")<br/>    versioning = optional(string, "Disabled")<br/>    tags       = optional(map(string), {})<br/>  }))</pre> | `{}` | no |
+| <a name="input_aws_s3_buckets_put_files"></a> [aws\_s3\_buckets\_put\_files](#input\_aws\_s3\_buckets\_put\_files) | AWS S3 bucket configurations | <pre>map(object({<br/>    folder_path = string<br/>    tags        = optional(map(string), {})<br/>  }))</pre> | `{}` | no |
 | <a name="input_project_prefix"></a> [project\_prefix](#input\_project\_prefix) | Project prefix - prefix for all resources | `string` | n/a | yes |
 | <a name="input_region"></a> [region](#input\_region) | AWS Region value | `string` | n/a | yes |
 

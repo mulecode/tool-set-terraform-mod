@@ -120,3 +120,11 @@ variable "aws_s3_bucket_policies" {
   }))
   default = {}
 }
+variable "aws_s3_buckets_put_files" {
+  description = "AWS S3 bucket put files configurations"
+  type = map(object({
+    folder_path = string
+    tags        = optional(map(string), {})
+  }))
+  default = {}
+}

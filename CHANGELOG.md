@@ -1,3 +1,11 @@
+## 🚀 [2.5.0] - 09/11/2024
+
+### ✅ New Features
+
+- Add S3 bucket put file module
+
+---
+
 ## 🚀 [2.4.4] - 09/11/2024
 
 ### 🛠️ Fixes

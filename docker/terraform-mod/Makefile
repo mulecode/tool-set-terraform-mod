@@ -73,6 +73,11 @@ apply: ## Terraform apply
 ##@ Utils
 ####################################################################################
 
+.PHONY: update_readme
+update_readme: ## Updates readme file with terraform modules
+	@echo "Updating README.md"
+	@terraform-docs markdown table --output-file ../../README.md --output-mode inject .
+
 .PHONY: help
 help: ## Display this help
 	awk \
