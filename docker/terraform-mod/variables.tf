@@ -128,3 +128,53 @@ variable "aws_s3_buckets_put_files" {
   }))
   default = {}
 }
+variable "aws_cloudfront_distributions" {
+  description = "AWS CloudFront distributions configurations"
+  type = map(object({
+    description         = string
+    default_root_object = optional(string, "index.html")
+    origins = optional(map(object({
+      connection_attempts = optional(number)
+      connection_timeout  = optional(number)
+      domain_name         = string
+      origin_path         = optional(string)
+      s3_origin_config    = optional(bool, false)
+      custom_origin_config = optional(object({
+        http_port                = optional(number, 80)
+        https_port               = optional(number, 443)
+        origin_keepalive_timeout = optional(number, 5)
+        origin_protocol_policy   = optional(string, "http-only")
+        origin_read_timeout      = optional(number, 30)
+        origin_ssl_protocols = optional(list(string), [
+          "SSLv3",
+          "TLSv1",
+          "TLSv1.1",
+          "TLSv1.2",
+        ])
+      }))
+    })), {})
+    viewer_certificate = optional(object({
+      cloudfront_default_certificate = optional(bool, true)
+      acm_certificate_arn            = optional(string, null)
+      ssl_support_method             = optional(string, "sni-only")
+      minimum_protocol_version       = optional(string, "TLSv1.2_2019")
+    }), null)
+    default_cache_behavior = object({
+      allowed_methods = optional(list(string), [
+        "DELETE", "GET", "HEAD", "OPTIONS", "PATCH", "POST", "PUT"
+      ])
+      cached_methods = optional(list(string), [
+        "HEAD", "GET"
+      ])
+      target_origin_id       = string
+      viewer_protocol_policy = optional(string, "redirect-to-https")
+      min_ttl                = optional(number, 0)     # 0 seconds
+      default_ttl            = optional(number, 3600)  # 1 hour
+      max_ttl                = optional(number, 86400) # 24 hours
+      forward_cookies        = optional(string, "none")
+      forward_query_string   = optional(bool, false)
+    })
+    tags = optional(map(string), {})
+  }))
+  default = {}
+}
