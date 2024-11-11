@@ -11,6 +11,15 @@ resource "aws_cloudfront_origin_access_identity" "main" {
   comment = local.prefixed_name
 }
 
+resource "aws_cloudfront_origin_access_control" "main" {
+  for_each                          = var.origin_access_controls
+  name                              = "${local.prefixed_name}-${each.key}"
+  description                       = each.value.description
+  signing_behavior                  = each.value.signing_behavior
+  signing_protocol                  = each.value.signing_protocol
+  origin_access_control_origin_type = each.value.origin_access_control_origin_type
+}
+
 resource "aws_cloudfront_distribution" "main" {
   enabled             = true
   is_ipv6_enabled     = true
@@ -21,13 +30,15 @@ resource "aws_cloudfront_distribution" "main" {
   dynamic "origin" {
     for_each = var.origins
     content {
-      connection_attempts = origin.value.connection_attempts
-      connection_timeout  = origin.value.connection_timeout
-      origin_id           = origin.key
-      domain_name         = origin.value.domain_name
-      origin_path         = origin.value.origin_path
+      connection_attempts      = origin.value.connection_attempts
+      connection_timeout       = origin.value.connection_timeout
+      origin_id                = origin.key
+      domain_name              = origin.value.domain_name
+      origin_path              = origin.value.origin_path
+      origin_access_control_id = origin.value.origin_access_control_id_enabled ? aws_cloudfront_origin_access_identity.main.id : null
 
       dynamic "s3_origin_config" {
+        # Legacy configuration
         for_each = origin.value.s3_origin_config ? ["singleton"] : []
         content {
           origin_access_identity = aws_cloudfront_origin_access_identity.main.cloudfront_access_identity_path

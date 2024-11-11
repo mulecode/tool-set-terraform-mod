@@ -1,3 +1,11 @@
+## 🚀 [2.8.0] - 11/11/2024
+
+### 🔄 Enhancements
+
+- Add origin_access_control to cloudfront distribution module
+
+---
+
 ## 🚀 [2.7.0] - 09/11/2024
 
 ### ✅ New Features

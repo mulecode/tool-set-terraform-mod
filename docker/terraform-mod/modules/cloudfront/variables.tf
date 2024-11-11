@@ -17,11 +17,12 @@ variable "default_root_object" {
 variable "origins" {
   description = "Add origins to cloud front"
   type = map(object({
-    connection_attempts = optional(number)
-    connection_timeout  = optional(number)
-    domain_name         = string
-    origin_path         = optional(string)
-    s3_origin_config    = optional(bool, false)
+    connection_attempts              = optional(number)
+    connection_timeout               = optional(number)
+    domain_name                      = string
+    origin_path                      = optional(string)
+    origin_access_control_id_enabled = optional(bool, false)
+    s3_origin_config                 = optional(bool, false)
     custom_origin_config = optional(object({
       http_port                = optional(number, 80)
       https_port               = optional(number, 443)
@@ -65,6 +66,16 @@ variable "default_cache_behavior" {
     forward_cookies        = optional(string, "none")
     forward_query_string   = optional(bool, false)
   })
+}
+variable "origin_access_controls" {
+  description = "Origin access control for cloudfront"
+  type = map(object({
+    description                       = string
+    signing_behavior                  = optional(string, "always")
+    signing_protocol                  = optional(string, "sigv4")
+    origin_access_control_origin_type = optional(string, "s3")
+  }))
+  default = {}
 }
 variable "tags" {
   description = "Map of tags to assign to the object."

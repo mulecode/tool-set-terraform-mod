@@ -134,11 +134,12 @@ variable "aws_cloudfront_distributions" {
     description         = string
     default_root_object = optional(string, "index.html")
     origins = optional(map(object({
-      connection_attempts = optional(number)
-      connection_timeout  = optional(number)
-      domain_name         = string
-      origin_path         = optional(string)
-      s3_origin_config    = optional(bool, false)
+      connection_attempts              = optional(number)
+      connection_timeout               = optional(number)
+      domain_name                      = string
+      origin_path                      = optional(string)
+      origin_access_control_id_enabled = optional(bool, false)
+      s3_origin_config                 = optional(bool, false)
       custom_origin_config = optional(object({
         http_port                = optional(number, 80)
         https_port               = optional(number, 443)
@@ -174,6 +175,12 @@ variable "aws_cloudfront_distributions" {
       forward_cookies        = optional(string, "none")
       forward_query_string   = optional(bool, false)
     })
+    origin_access_controls = optional(map(object({
+      description                       = string
+      signing_behavior                  = optional(string, "always")
+      signing_protocol                  = optional(string, "sigv4")
+      origin_access_control_origin_type = optional(string, "s3")
+    })), {})
     tags = optional(map(string), {})
   }))
   default = {}
