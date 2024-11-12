@@ -1,3 +1,11 @@
+## 🚀 [2.8.3] - 12/11/2024
+
+### 🔄 Enhancements
+
+- Lint the code - part 2
+
+---
+
 ## 🚀 [2.8.2] - 12/11/2024
 
 ### 🔄 Enhancements
