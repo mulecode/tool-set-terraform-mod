@@ -1,3 +1,11 @@
+## 🚀 [2.8.1] - 11/11/2024
+
+### 🔄 Enhancements
+
+- Add an option to use security origin legacy (OAI) and new (OAC)
+
+---
+
 ## 🚀 [2.8.0] - 11/11/2024
 
 ### 🔄 Enhancements

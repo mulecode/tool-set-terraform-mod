@@ -21,7 +21,9 @@ variable "origins" {
     connection_timeout               = optional(number)
     domain_name                      = string
     origin_path                      = optional(string)
-    origin_access_control_id_enabled = optional(bool, false)
+    origin_access_control_id         = optional(string)
+    origin_access_control_id_as_oai  = optional(bool, false)
+    origin_access_control_id_as_oac  = optional(bool, false)
     s3_origin_config                 = optional(bool, false)
     custom_origin_config = optional(object({
       http_port                = optional(number, 80)

@@ -30,12 +30,14 @@ resource "aws_cloudfront_distribution" "main" {
   dynamic "origin" {
     for_each = var.origins
     content {
-      connection_attempts      = origin.value.connection_attempts
-      connection_timeout       = origin.value.connection_timeout
-      origin_id                = origin.key
-      domain_name              = origin.value.domain_name
-      origin_path              = origin.value.origin_path
-      origin_access_control_id = origin.value.origin_access_control_id_enabled ? aws_cloudfront_origin_access_identity.main.id : null
+      connection_attempts = origin.value.connection_attempts
+      connection_timeout  = origin.value.connection_timeout
+      origin_id           = origin.key
+      domain_name         = origin.value.domain_name
+      origin_path         = origin.value.origin_path
+      origin_access_control_id = origin.value.origin_access_control_id_as_oai ? aws_cloudfront_origin_access_identity.main.id : (
+        origin.value.origin_access_control_id_as_oac ? aws_cloudfront_origin_access_control.main[origin.key].id : origin.value.origin_access_control_id
+      )
 
       dynamic "s3_origin_config" {
         # Legacy configuration
