@@ -1,3 +1,11 @@
+## 🚀 [2.8.4] - 23/11/2024
+
+### 🔄 Enhancements
+
+- Add Custom error responses for cloudfront distribution module
+
+---
+
 ## 🚀 [2.8.3] - 12/11/2024
 
 ### 🔄 Enhancements

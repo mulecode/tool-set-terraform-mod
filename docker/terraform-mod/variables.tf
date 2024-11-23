@@ -182,6 +182,12 @@ variable "aws_cloudfront_distributions" {
       signing_protocol                  = optional(string, "sigv4")
       origin_access_control_origin_type = optional(string, "s3")
     })), {})
+    custom_error_responses = optional(map(object({
+      error_code            = number
+      response_page_path    = string
+      response_code         = number
+      error_caching_min_ttl = string
+    })), {})
     tags = optional(map(string), {})
   }))
   default = {}

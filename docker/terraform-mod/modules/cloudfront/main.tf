@@ -80,11 +80,14 @@ resource "aws_cloudfront_distribution" "main" {
     max_ttl                = var.default_cache_behavior.max_ttl
   }
 
-  custom_error_response {
-    error_code            = 404
-    response_page_path    = "/index.html"
-    response_code         = 200
-    error_caching_min_ttl = 0
+  dynamic "custom_error_response" {
+    for_each = var.custom_error_responses
+    content {
+      error_code            = custom_error_response.value.error_code
+      response_page_path    = custom_error_response.value.response_page_path
+      response_code         = custom_error_response.value.response_code
+      error_caching_min_ttl = custom_error_response.value.error_caching_min_ttl
+    }
   }
 
   dynamic "viewer_certificate" {
