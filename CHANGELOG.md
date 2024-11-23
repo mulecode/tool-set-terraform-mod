@@ -1,3 +1,11 @@
+## 🚀 [2.8.6] - 23/11/2024
+
+### 🔄 Enhancements
+
+- Minor fix for cloudfront module
+
+---
+
 ## 🚀 [2.8.5] - 23/11/2024
 
 ### 🔄 Enhancements

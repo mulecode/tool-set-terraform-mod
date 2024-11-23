@@ -10,6 +10,7 @@ module "cloudfront" {
   viewer_certificate     = each.value.viewer_certificate
   default_cache_behavior = each.value.default_cache_behavior
   origin_access_controls = each.value.origin_access_controls
+  custom_error_responses = each.value.custom_error_responses
 
   tags = each.value.tags
 }
