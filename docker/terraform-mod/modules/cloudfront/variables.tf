@@ -41,6 +41,16 @@ variable "origins" {
   }))
   default = {}
 }
+variable "custom_error_responses" {
+  description = "Add custom error response to cloud front"
+  type = map(object({
+    error_code            = number
+    response_page_path    = string
+    response_code         = number
+    error_caching_min_ttl = string
+  }))
+  default = {}
+}
 variable "viewer_certificate" {
   description = "Viewer certificate for cloudfront"
   type = object({
