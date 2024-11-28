@@ -1,3 +1,12 @@
+## 🚀 [2.8.8] - 28/11/2024
+
+### 🔄 Enhancements
+
+- Fix broken documentation in README
+- Update documentation generation command
+
+---
+
 ## 🚀 [2.8.7] - 28/11/2024
 
 ### 🔄 Enhancements
