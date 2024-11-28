@@ -188,6 +188,22 @@ variable "aws_cloudfront_distributions" {
       response_code         = number
       error_caching_min_ttl = string
     })), {})
+    ordered_cache_behaviors = optional(map(object({
+      path_pattern           = optional(string, "/api/*")
+      allowed_methods        = optional(list(string), ["DELETE", "GET", "HEAD", "OPTIONS", "PATCH", "POST", "PUT"])
+      cached_methods         = optional(list(string), ["HEAD", "GET"])
+      viewer_protocol_policy = optional(string, "redirect-to-https")
+      cache_policy_id        = optional(string, null)
+      min_ttl                = optional(number, 0)
+      default_ttl            = optional(number, 3600)
+      max_ttl                = optional(number, 86400)
+      forwarded_values = optional(object({
+        query_string = optional(bool, false)
+        cookies = optional(object({
+          forward = optional(string, "none")
+        }), null)
+      }), null)
+    })), {})
     tags = optional(map(string), {})
   }))
   default = {}
