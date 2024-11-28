@@ -100,6 +100,36 @@ resource "aws_cloudfront_distribution" "main" {
     }
   }
 
+  dynamic "ordered_cache_behavior" {
+    for_each = var.ordered_cache_behaviors
+    content {
+      path_pattern           = ordered_cache_behavior.value.path_pattern
+      allowed_methods        = ordered_cache_behavior.value.allowed_methods
+      cached_methods         = ordered_cache_behavior.value.cached_methods
+      cache_policy_id        = ordered_cache_behavior.value.cache_policy_id
+      target_origin_id       = ordered_cache_behavior.key
+      viewer_protocol_policy = ordered_cache_behavior.value.viewer_protocol_policy
+
+      dynamic "forwarded_values" {
+        for_each = ordered_cache_behavior.value.forwarded_values != null ? ["singleton"] : []
+        content {
+          query_string = ordered_cache_behavior.value.forwarded_values.query_string
+
+          dynamic "cookies" {
+            for_each = ordered_cache_behavior.value.forwarded_values.cookies != null ? ["singleton"] : []
+            content {
+              forward = ordered_cache_behavior.value.forwarded_values.cookies.forward
+            }
+          }
+        }
+      }
+
+      min_ttl     = ordered_cache_behavior.value.min_ttl
+      default_ttl = ordered_cache_behavior.value.default_ttl
+      max_ttl     = ordered_cache_behavior.value.max_ttl
+    }
+  }
+
   restrictions {
     geo_restriction {
       restriction_type = "none"

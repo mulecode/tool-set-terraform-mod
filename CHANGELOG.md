@@ -1,3 +1,11 @@
+## 🚀 [2.8.7] - 28/11/2024
+
+### 🔄 Enhancements
+
+- Add ordered cache to cloud front distribution module
+
+---
+
 ## 🚀 [2.8.6] - 23/11/2024
 
 ### 🔄 Enhancements
