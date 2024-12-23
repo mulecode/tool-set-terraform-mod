@@ -208,3 +208,39 @@ variable "aws_cloudfront_distributions" {
   }))
   default = {}
 }
+variable "aws_cognito_configs" {
+  description = "AWS Cognito configurations"
+  type = map(object({
+    description = string
+    admin_create_user_config = optional(object({
+      allow_admin_create_user_only = bool
+    }), null)
+    custom_ui = optional(object({
+      css  = string
+      logo = string
+    }), null)
+    callback_urls                        = optional(list(string), [])
+    generate_client_secret               = optional(bool, false)
+    allowed_oauth_flows_user_pool_client = optional(bool, false)
+    allowed_oauth_flows                  = optional(list(string), [])
+    allowed_oauth_scopes                 = optional(list(string), [])
+    cognito_domain = optional(object({
+      domain = string
+    }), null)
+    custom_domain = optional(object({
+      domain          = string
+      zone_id         = string
+      certificate_arn = string
+    }), null)
+    resource_server = optional(object({
+      identifier = string
+      name       = string
+      scopes = list(object({
+        description = string
+        scope_name  = string
+      }))
+    }), null)
+    tags = optional(map(string), {})
+  }))
+  default = {}
+}

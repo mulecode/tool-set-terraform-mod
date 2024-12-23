@@ -1,3 +1,11 @@
+## 🚀 [2.9.0] - 23/12/2024
+
+### ✅ New Features
+
+- Add cognito user pool module
+
+---
+
 ## 🚀 [2.8.8] - 28/11/2024
 
 ### 🔄 Enhancements
