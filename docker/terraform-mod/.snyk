@@ -18,3 +18,11 @@ ignore:
     - '*':
         reason: "Wont affect the project"
         expires: "2025-12-31T23:59:59Z"
+  SNYK-GOLANG-GOLANGORGXNETHTML-8535262:
+    - '*':
+        reason: "Wont affect the project"
+        expires: "2025-12-31T23:59:59Z"
+  SNYK-GOLANG-GOLANGORGXCRYPTOSSH-8496611:
+    - '*':
+        reason: "Wont affect the project"
+        expires: "2025-12-31T23:59:59Z"
