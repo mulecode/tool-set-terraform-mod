@@ -199,6 +199,7 @@ variable "aws_cloudfront_distributions" {
       max_ttl                = optional(number, 86400)
       forwarded_values = optional(object({
         query_string = optional(bool, false)
+        headers      = optional(list(string), null)
         cookies = optional(object({
           forward = optional(string, "none")
         }), null)

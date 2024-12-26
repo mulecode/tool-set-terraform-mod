@@ -114,6 +114,7 @@ resource "aws_cloudfront_distribution" "main" {
         for_each = ordered_cache_behavior.value.forwarded_values != null ? ["singleton"] : []
         content {
           query_string = ordered_cache_behavior.value.forwarded_values.query_string
+          headers      = ordered_cache_behavior.value.forwarded_values.headers
 
           dynamic "cookies" {
             for_each = ordered_cache_behavior.value.forwarded_values.cookies != null ? ["singleton"] : []
