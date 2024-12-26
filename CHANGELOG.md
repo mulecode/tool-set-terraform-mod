@@ -1,3 +1,11 @@
+## 🚀 [2.9.1] - 26/12/2024
+
+### 🔄 Enhancements
+
+- Add forward headers to cloudfront distribution module
+
+---
+
 ## 🚀 [2.9.0] - 23/12/2024
 
 ### ✅ New Features
