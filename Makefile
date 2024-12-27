@@ -43,7 +43,6 @@ src_formater: ## Format source code
 .PHONY: src_docs
 src_docs: ## Generate source code documentation
 	@echo "Generating source code documentation"
-	@#terraform-docs markdown table ./docker/$(IMAGE) > README.md
 	@terraform-docs markdown table --output-file ../../README.md --output-mode inject ./docker/$(IMAGE)
 
 .PHONY: docker_lint

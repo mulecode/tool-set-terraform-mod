@@ -16,5 +16,6 @@ module "cognito" {
   resource_server                      = each.value.resource_server
   admin_create_user_config             = try(each.value.admin_create_user_config, null)
   custom_ui                            = try(each.value.custom_ui, null)
+  schemas                              = each.value.schemas
   tags                                 = each.value.tags
 }

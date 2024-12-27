@@ -1,3 +1,11 @@
+## 🚀 [2.9.2] - 27/12/2024
+
+### 🔄 Enhancements
+
+- Add cognito custom attributes
+
+---
+
 ## 🚀 [2.9.1] - 26/12/2024
 
 ### 🔄 Enhancements

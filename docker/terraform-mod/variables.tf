@@ -241,6 +241,16 @@ variable "aws_cognito_configs" {
         scope_name  = string
       }))
     }), null)
+    schemas = optional(map(object({
+      attribute_data_type      = string
+      developer_only_attribute = optional(bool, false)
+      mutable                  = optional(bool, false)
+      required                 = optional(bool, false)
+      string_attribute_constraints = optional(object({
+        max_length = optional(number, 0)
+        min_length = optional(number, 0)
+      }), null)
+    })), {})
     tags = optional(map(string), {})
   }))
   default = {}

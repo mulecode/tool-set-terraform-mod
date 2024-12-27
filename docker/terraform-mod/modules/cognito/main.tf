@@ -19,6 +19,22 @@ resource "aws_cognito_user_pool" "main" {
       allow_admin_create_user_only = var.admin_create_user_config.allow_admin_create_user_only
     }
   }
+
+  dynamic "schema" {
+    for_each = var.schemas
+    content {
+      attribute_data_type      = schema.value.attribute_data_type
+      developer_only_attribute = schema.value.developer_only_attribute
+      mutable                  = schema.value.mutable
+      name                     = schema.key
+      required                 = schema.value.required
+      string_attribute_constraints {
+        max_length = schema.value.string_attribute_constraints.max_length
+        min_length = schema.value.string_attribute_constraints.min_length
+      }
+    }
+  }
+
 }
 
 resource "aws_cognito_user_pool_client" "main" {

@@ -82,6 +82,20 @@ variable "resource_server" {
   })
   default = null
 }
+variable "schemas" {
+  description = "List of schemas for the user pool"
+  type = map(object({
+    attribute_data_type      = string
+    developer_only_attribute = bool
+    mutable                  = bool
+    required                 = bool
+    string_attribute_constraints = object({
+      max_length = number
+      min_length = number
+    })
+  }))
+  default = null
+}
 variable "tags" {
   description = "Map of tags to assign to the object."
   type        = map(string)
