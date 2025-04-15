@@ -1,3 +1,11 @@
+## 🚀 [2.9.3] - 15/04/2025
+
+### 🔄 Enhancements
+
+- Update terraform version to 1.11.4
+
+---
+
 ## 🚀 [2.9.2] - 27/12/2024
 
 ### 🔄 Enhancements
