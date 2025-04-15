@@ -1,3 +1,11 @@
+## 🚀 [2.9.4] - 15/04/2025
+
+### 🔄 Enhancements
+
+- Update Terraform and AWS provider versions to 1.11.4 and 5.94.1 respectively
+
+---
+
 ## 🚀 [2.9.3] - 15/04/2025
 
 ### 🔄 Enhancements
