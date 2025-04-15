@@ -1,7 +1,7 @@
-FROM hashicorp/terraform:1.9.8
+FROM hashicorp/terraform:1.11.4
 
 LABEL org.opencontainers.image.source="https://github.com/mulecode/tool-set-terraform-mod"
-LABEL org.opencontainers.image.description="Terraform 2.8.8 Tool-set"
+LABEL org.opencontainers.image.description="Terraform 1.11.4 Tool-set"
 
 WORKDIR /opt/terraform
 COPY Makefile ./Makefile

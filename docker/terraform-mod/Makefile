@@ -33,6 +33,11 @@ destroy: init destroy apply ## Initialise, plan, destroy and apply terraform
 .PHONY: version
 version: ## Terraform version
 	@terraform version
+	@echo "ENV: $(ENV)"
+	@echo "TERRAFORM_MODULE: $(TERRAFORM_MODULE)"
+	@echo "TERRAFORM_DIR: $(TERRAFORM_DIR)"
+	@echo "TERRAFORM_CONFIG_DIR: $(TERRAFORM_CONFIG_DIR)"
+	@echo "TERRAFORM_PLAN_DIR: $(TERRAFORM_PLAN_DIR)"
 
 .PHONY: validate
 validate: ## Terraform validate
