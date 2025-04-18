@@ -13,38 +13,28 @@ resource "aws_cloudfront_origin_access_identity" "main" {
 
 resource "aws_cloudfront_cache_policy" "main" {
   for_each    = var.cache_policies
-  id          = "${local.prefixed_name}-${each.key}"
-  name        = each.value.name
+  name        = "${local.prefixed_name}-${each.key}"
   min_ttl     = each.value.min_ttl
   max_ttl     = each.value.max_ttl
   default_ttl = each.value.default_ttl
   comment     = each.value.comment
   parameters_in_cache_key_and_forwarded_to_origin {
-    dynamic "cookies_config" {
-      for_each = var.cache_policies.cookies_config
-      content {
-        cookie_behavior = cookies_config.value.cookie_behavior
-        cookies {
-          items = cookies_config.value.cookies
-        }
+    cookies_config {
+      cookie_behavior = each.value.cookies_config.cookie_behavior
+      cookies {
+        items = each.value.cookies_config.cookies
       }
     }
-    dynamic "headers_config" {
-      for_each = var.cache_policies.headers_config
-      content {
-        header_behavior = headers_config.value.header_behavior
-        headers {
-          items = headers_config.value.headers
-        }
+    headers_config {
+      header_behavior = each.value.headers_config.header_behavior
+      headers {
+        items = each.value.headers_config.headers
       }
     }
-    dynamic "query_strings_config" {
-      for_each = var.cache_policies.headers_config
-      content {
-        query_string_behavior = query_strings_config.value.query_strings_behavior
-        query_strings {
-          items = query_strings_config.value.query_strings
-        }
+    query_strings_config {
+      query_string_behavior = each.value.query_strings_config.query_strings_behavior
+      query_strings {
+        items = each.value.query_strings_config.query_strings
       }
     }
   }

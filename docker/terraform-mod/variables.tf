@@ -210,19 +210,19 @@ variable "aws_cloudfront_distributions" {
       max_ttl     = optional(number, 31536000)
       default_ttl = optional(number, 86400)
       comment     = optional(string, "Cache policy for cloudfront")
-      cookies_config = optional(object({
+      cookies_config = object({
         cookie_behavior = optional(string, "none")
         cookies         = optional(list(string), null)
-      }), null)
-      headers_config = optional(object({
+      })
+      headers_config = object({
         header_behavior = optional(string, "none")
         headers         = optional(list(string), null)
-      }), null)
-      query_strings_config = optional(object({
+      })
+      query_strings_config = object({
         query_strings_behavior = optional(string, "none")
         query_strings          = optional(list(string), null)
-      }), null)
-    })))
+      })
+    })), {})
     tags = optional(map(string), {})
   }))
   default = {}

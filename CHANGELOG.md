@@ -1,3 +1,11 @@
+## 🚀 [2.10.3] - 15/04/2025
+
+### 🛠️ Fixes
+
+- Fixes for cloudfront distribution module
+
+---
+
 ## 🚀 [2.10.2] - 15/04/2025
 
 ### 🛠️ Fixes
