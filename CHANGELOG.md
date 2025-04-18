@@ -1,3 +1,11 @@
+## 🚀 [2.10.6] - 18/04/2025
+
+### 🔄 Enhancements
+
+- Fix origin_request_policies
+
+---
+
 ## 🚀 [2.10.5] - 18/04/2025
 
 ### 🔄 Enhancements

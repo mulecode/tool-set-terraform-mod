@@ -124,7 +124,7 @@ resource "aws_cloudfront_distribution" "main" {
     target_origin_id = var.default_cache_behavior.target_origin_id
 
     cache_policy_id          = aws_cloudfront_cache_policy.main[var.default_cache_behavior.cache_policy_id].id
-    origin_request_policy_id = aws_cloudfront_origin_request_policy.main[var.default_cache_behavior.origin_request_policy_id].id
+    origin_request_policy_id = var.default_cache_behavior.origin_request_policy_id != null ? aws_cloudfront_origin_request_policy.main[var.default_cache_behavior.origin_request_policy_id].id : null
 
     viewer_protocol_policy = var.default_cache_behavior.viewer_protocol_policy
     min_ttl                = var.default_cache_behavior.min_ttl
@@ -159,7 +159,7 @@ resource "aws_cloudfront_distribution" "main" {
       allowed_methods          = ordered_cache_behavior.value.allowed_methods
       cached_methods           = ordered_cache_behavior.value.cached_methods
       cache_policy_id          = aws_cloudfront_cache_policy.main[ordered_cache_behavior.value.cache_policy_id].id
-      origin_request_policy_id = aws_cloudfront_cache_policy.main[ordered_cache_behavior.value.origin_request_policy_id].id
+      origin_request_policy_id = ordered_cache_behavior.value.origin_request_policy_id != null ? aws_cloudfront_origin_request_policy.main[ordered_cache_behavior.value.origin_request_policy_id].id : null
       target_origin_id         = ordered_cache_behavior.key
       viewer_protocol_policy   = ordered_cache_behavior.value.viewer_protocol_policy
 
