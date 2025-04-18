@@ -40,6 +40,30 @@ resource "aws_cloudfront_cache_policy" "main" {
   }
 }
 
+resource "aws_cloudfront_origin_request_policy" "main" {
+  for_each = var.origin_request_policies
+  name     = "${local.prefixed_name}-${each.key}"
+  comment  = each.value.comment
+  cookies_config {
+    cookie_behavior = each.value.cookies_config.cookie_behavior
+    cookies {
+      items = each.value.cookies_config.cookies
+    }
+  }
+  headers_config {
+    header_behavior = each.value.headers_config.header_behavior
+    headers {
+      items = each.value.headers_config.headers
+    }
+  }
+  query_strings_config {
+    query_string_behavior = each.value.query_strings_config.query_strings_behavior
+    query_strings {
+      items = each.value.query_strings_config.query_strings
+    }
+  }
+}
+
 resource "aws_cloudfront_origin_access_control" "main" {
   for_each                          = var.origin_access_controls
   name                              = "${local.prefixed_name}-${each.key}"
@@ -51,7 +75,8 @@ resource "aws_cloudfront_origin_access_control" "main" {
 
 resource "aws_cloudfront_distribution" "main" {
   depends_on = [
-    aws_cloudfront_cache_policy.main
+    aws_cloudfront_cache_policy.main,
+    aws_cloudfront_origin_request_policy.main
   ]
   enabled             = true
   is_ipv6_enabled     = true
@@ -98,7 +123,8 @@ resource "aws_cloudfront_distribution" "main" {
     cached_methods   = var.default_cache_behavior.cached_methods
     target_origin_id = var.default_cache_behavior.target_origin_id
 
-    cache_policy_id = aws_cloudfront_cache_policy.main[var.default_cache_behavior.cache_policy_id].id
+    cache_policy_id          = aws_cloudfront_cache_policy.main[var.default_cache_behavior.cache_policy_id].id
+    origin_request_policy_id = aws_cloudfront_origin_request_policy.main[var.default_cache_behavior.origin_request_policy_id].id
 
     viewer_protocol_policy = var.default_cache_behavior.viewer_protocol_policy
     min_ttl                = var.default_cache_behavior.min_ttl
@@ -129,12 +155,13 @@ resource "aws_cloudfront_distribution" "main" {
   dynamic "ordered_cache_behavior" {
     for_each = var.ordered_cache_behaviors
     content {
-      path_pattern           = ordered_cache_behavior.value.path_pattern
-      allowed_methods        = ordered_cache_behavior.value.allowed_methods
-      cached_methods         = ordered_cache_behavior.value.cached_methods
-      cache_policy_id        = aws_cloudfront_cache_policy.main[ordered_cache_behavior.value.cache_policy_id].id
-      target_origin_id       = ordered_cache_behavior.key
-      viewer_protocol_policy = ordered_cache_behavior.value.viewer_protocol_policy
+      path_pattern             = ordered_cache_behavior.value.path_pattern
+      allowed_methods          = ordered_cache_behavior.value.allowed_methods
+      cached_methods           = ordered_cache_behavior.value.cached_methods
+      cache_policy_id          = aws_cloudfront_cache_policy.main[ordered_cache_behavior.value.cache_policy_id].id
+      origin_request_policy_id = aws_cloudfront_cache_policy.main[ordered_cache_behavior.value.origin_request_policy_id].id
+      target_origin_id         = ordered_cache_behavior.key
+      viewer_protocol_policy   = ordered_cache_behavior.value.viewer_protocol_policy
 
       dynamic "forwarded_values" {
         for_each = ordered_cache_behavior.value.forwarded_values != null ? ["singleton"] : []

@@ -1,8 +1,18 @@
+## 🚀 [2.10.5] - 18/04/2025
+
+### 🔄 Enhancements
+
+- Add origin_request_policies for cloudfront distribution module
+
+---
+
 ## 🚀 [2.10.4] - 18/04/2025
 
 ### 🔄 Enhancements
 
 - Ensure cache_policy_id is used in ordered cache behaviour
+
+---
 
 ## 🚀 [2.10.3] - 18/04/2025
 

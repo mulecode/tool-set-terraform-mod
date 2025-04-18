@@ -54,14 +54,15 @@ variable "custom_error_responses" {
 variable "ordered_cache_behaviors" {
   description = "Adds ordered cache behaviors to cloud front"
   type = map(object({
-    path_pattern           = optional(string, "/api/*")
-    allowed_methods        = optional(list(string), ["DELETE", "GET", "HEAD", "OPTIONS", "PATCH", "POST", "PUT"])
-    cached_methods         = optional(list(string), ["HEAD", "GET"])
-    viewer_protocol_policy = optional(string, "redirect-to-https")
-    cache_policy_id        = optional(string, null)
-    min_ttl                = optional(number, 0)
-    default_ttl            = optional(number, 3600)
-    max_ttl                = optional(number, 86400)
+    path_pattern             = optional(string, "/api/*")
+    allowed_methods          = optional(list(string), ["DELETE", "GET", "HEAD", "OPTIONS", "PATCH", "POST", "PUT"])
+    cached_methods           = optional(list(string), ["HEAD", "GET"])
+    viewer_protocol_policy   = optional(string, "redirect-to-https")
+    cache_policy_id          = optional(string, null)
+    origin_request_policy_id = optional(string, null)
+    min_ttl                  = optional(number, 0)
+    default_ttl              = optional(number, 3600)
+    max_ttl                  = optional(number, 86400)
     forwarded_values = optional(object({
       query_string = optional(bool, false)
       headers      = optional(list(string), null)
@@ -91,12 +92,13 @@ variable "default_cache_behavior" {
     cached_methods = optional(list(string), [
       "HEAD", "GET"
     ])
-    target_origin_id       = string
-    viewer_protocol_policy = optional(string, "redirect-to-https")
-    min_ttl                = optional(number, 0)     # 0 seconds
-    default_ttl            = optional(number, 3600)  # 1 hour
-    max_ttl                = optional(number, 86400) # 24 hours
-    cache_policy_id        = string
+    target_origin_id         = string
+    viewer_protocol_policy   = optional(string, "redirect-to-https")
+    min_ttl                  = optional(number, 0)     # 0 seconds
+    default_ttl              = optional(number, 3600)  # 1 hour
+    max_ttl                  = optional(number, 86400) # 24 hours
+    cache_policy_id          = string
+    origin_request_policy_id = optional(string)
   })
 }
 variable "origin_access_controls" {
@@ -117,6 +119,26 @@ variable "cache_policies" {
     max_ttl     = optional(number, 31536000)
     default_ttl = optional(number, 86400)
     comment     = optional(string, "Cache policy for cloudfront")
+    cookies_config = object({
+      cookie_behavior = optional(string, "none")
+      cookies         = optional(list(string), null)
+    })
+    headers_config = object({
+      header_behavior = optional(string, "none")
+      headers         = optional(list(string), null)
+    })
+    query_strings_config = object({
+      query_strings_behavior = optional(string, "none")
+      query_strings          = optional(list(string), null)
+    })
+  }))
+  default = {}
+}
+variable "origin_request_policies" {
+  description = "Create Origin Request policies for cloudfront"
+  type = map(object({
+    name    = string
+    comment = optional(string, "Origin Request policies")
     cookies_config = object({
       cookie_behavior = optional(string, "none")
       cookies         = optional(list(string), null)
