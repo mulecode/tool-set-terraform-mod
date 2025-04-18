@@ -1,3 +1,11 @@
+## 🚀 [2.9.5] - 15/04/2025
+
+### 🔄 Enhancements
+
+- Add support for creation policy for cloud front default cache
+
+---
+
 ## 🚀 [2.9.4] - 15/04/2025
 
 ### 🔄 Enhancements

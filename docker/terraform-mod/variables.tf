@@ -173,8 +173,7 @@ variable "aws_cloudfront_distributions" {
       min_ttl                = optional(number, 0)     # 0 seconds
       default_ttl            = optional(number, 3600)  # 1 hour
       max_ttl                = optional(number, 86400) # 24 hours
-      forward_cookies        = optional(string, "none")
-      forward_query_string   = optional(bool, false)
+      cache_policy_id        = string
     })
     origin_access_controls = optional(map(object({
       description                       = string
@@ -205,6 +204,126 @@ variable "aws_cloudfront_distributions" {
         }), null)
       }), null)
     })), {})
+    cache_policies = optional(map(object({
+      name        = string
+      min_ttl     = optional(number, 0)
+      max_ttl     = optional(number, 31536000)
+      default_ttl = optional(number, 86400)
+      comment     = optional(string, "Cache policy for cloudfront")
+      cookies_config = optional(object({
+        cookie_behavior = optional(string, "none")
+        cookies         = optional(list(string), null)
+      }), null)
+      headers_config = optional(object({
+        header_behavior = optional(string, "none")
+        headers         = optional(list(string), null)
+      }), null)
+      query_strings_config = optional(object({
+        query_strings_behavior = optional(string, "none")
+        query_strings          = optional(list(string), null)
+      }), null)
+    })))
+    tags = optional(map(string), {})
+  }))
+  default = {}
+}
+variable "aws_cloudfront_cache_policies" {
+  description = "AWS CloudFront distributions configurations"
+  type = map(object({
+    description         = string
+    default_root_object = optional(string, "index.html")
+    origins = optional(map(object({
+      connection_attempts             = optional(number)
+      connection_timeout              = optional(number)
+      domain_name                     = string
+      origin_path                     = optional(string)
+      origin_access_control_id_as_oai = optional(bool, false)
+      origin_access_control_id_as_oac = optional(bool, false)
+      s3_origin_config                = optional(bool, false)
+      custom_origin_config = optional(object({
+        http_port                = optional(number, 80)
+        https_port               = optional(number, 443)
+        origin_keepalive_timeout = optional(number, 5)
+        origin_protocol_policy   = optional(string, "http-only")
+        origin_read_timeout      = optional(number, 30)
+        origin_ssl_protocols = optional(list(string), [
+          "SSLv3",
+          "TLSv1",
+          "TLSv1.1",
+          "TLSv1.2",
+        ])
+      }))
+    })), {})
+    viewer_certificate = optional(object({
+      cloudfront_default_certificate = optional(bool, true)
+      acm_certificate_arn            = optional(string, null)
+      ssl_support_method             = optional(string, "sni-only")
+      minimum_protocol_version       = optional(string, "TLSv1.2_2019")
+    }), null)
+    default_cache_behavior = object({
+      allowed_methods = optional(list(string), [
+        "DELETE", "GET", "HEAD", "OPTIONS", "PATCH", "POST", "PUT"
+      ])
+      cached_methods = optional(list(string), [
+        "HEAD", "GET"
+      ])
+      target_origin_id       = string
+      viewer_protocol_policy = optional(string, "redirect-to-https")
+      min_ttl                = optional(number, 0)     # 0 seconds
+      default_ttl            = optional(number, 3600)  # 1 hour
+      max_ttl                = optional(number, 86400) # 24 hours
+      cache_policy_id        = string
+      # forward_cookies = optional(string, "none")
+      # forward_query_string = optional(bool, false)
+    })
+    origin_access_controls = optional(map(object({
+      description                       = string
+      signing_behavior                  = optional(string, "always")
+      signing_protocol                  = optional(string, "sigv4")
+      origin_access_control_origin_type = optional(string, "s3")
+    })), {})
+    custom_error_responses = optional(map(object({
+      error_code            = number
+      response_page_path    = string
+      response_code         = number
+      error_caching_min_ttl = string
+    })), {})
+    ordered_cache_behaviors = optional(map(object({
+      path_pattern           = optional(string, "/api/*")
+      allowed_methods        = optional(list(string), ["DELETE", "GET", "HEAD", "OPTIONS", "PATCH", "POST", "PUT"])
+      cached_methods         = optional(list(string), ["HEAD", "GET"])
+      viewer_protocol_policy = optional(string, "redirect-to-https")
+      cache_policy_id        = optional(string, null)
+      min_ttl                = optional(number, 0)
+      default_ttl            = optional(number, 3600)
+      max_ttl                = optional(number, 86400)
+      forwarded_values = optional(object({
+        query_string = optional(bool, false)
+        headers      = optional(list(string), null)
+        cookies = optional(object({
+          forward = optional(string, "none")
+        }), null)
+      }), null)
+    })), {})
+    cache_policies = optional(map(object({
+      name        = string
+      min_ttl     = optional(number, 0)
+      max_ttl     = optional(number, 31536000)
+      default_ttl = optional(number, 86400)
+      comment     = optional(string, "Cache policy for cloudfront")
+      cookies_config = optional(object({
+        cookie_behavior = optional(string, "none")
+        cookies         = optional(list(string), null)
+      }), null)
+      headers_config = optional(object({
+        header_behavior = optional(string, "none")
+        headers         = optional(list(string), null)
+      }), null)
+      query_strings_config = optional(object({
+        query_strings_behavior = optional(string, "none")
+        query_strings          = optional(list(string), null)
+      }), null)
+    })))
     tags = optional(map(string), {})
   }))
   default = {}

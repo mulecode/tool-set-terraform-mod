@@ -96,8 +96,7 @@ variable "default_cache_behavior" {
     min_ttl                = optional(number, 0)     # 0 seconds
     default_ttl            = optional(number, 3600)  # 1 hour
     max_ttl                = optional(number, 86400) # 24 hours
-    forward_cookies        = optional(string, "none")
-    forward_query_string   = optional(bool, false)
+    cache_policy_id        = string
   })
 }
 variable "origin_access_controls" {
@@ -107,6 +106,29 @@ variable "origin_access_controls" {
     signing_behavior                  = optional(string, "always")
     signing_protocol                  = optional(string, "sigv4")
     origin_access_control_origin_type = optional(string, "s3")
+  }))
+  default = {}
+}
+variable "cache_policies" {
+  description = "Create cache policies for cloudfront"
+  type = map(object({
+    name        = string
+    min_ttl     = optional(number, 0)
+    max_ttl     = optional(number, 31536000)
+    default_ttl = optional(number, 86400)
+    comment     = optional(string, "Cache policy for cloudfront")
+    cookies_config = optional(object({
+      cookie_behavior = optional(string, "none")
+      cookies         = optional(list(string), null)
+    }), null)
+    headers_config = optional(object({
+      header_behavior = optional(string, "none")
+      headers         = optional(list(string), null)
+    }), null)
+    query_strings_config = optional(object({
+      query_strings_behavior = optional(string, "none")
+      query_strings          = optional(list(string), null)
+    }), null)
   }))
   default = {}
 }
