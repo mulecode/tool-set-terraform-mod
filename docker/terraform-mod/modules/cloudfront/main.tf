@@ -13,7 +13,7 @@ resource "aws_cloudfront_origin_access_identity" "main" {
 
 resource "aws_cloudfront_cache_policy" "main" {
   for_each    = var.cache_policies
-  id          = "${local.prefixed_name}-${each.value.name}"
+  id          = "${local.prefixed_name}-${each.key}"
   name        = each.value.name
   min_ttl     = each.value.min_ttl
   max_ttl     = each.value.max_ttl

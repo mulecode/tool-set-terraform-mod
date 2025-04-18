@@ -1,3 +1,11 @@
+## 🚀 [2.10.2] - 15/04/2025
+
+### 🛠️ Fixes
+
+- Removed unused variables from cloudfront distribution module
+
+---
+
 ## 🚀 [2.10.1] - 15/04/2025
 
 ### 🛠️ Fixes
