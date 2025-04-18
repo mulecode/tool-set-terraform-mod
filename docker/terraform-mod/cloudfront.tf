@@ -13,5 +13,6 @@ module "cloudfront" {
   custom_error_responses  = each.value.custom_error_responses
   ordered_cache_behaviors = each.value.ordered_cache_behaviors
   cache_policies          = each.value.cache_policies
+  origin_request_policies = each.value.origin_request_policies
   tags                    = each.value.tags
 }

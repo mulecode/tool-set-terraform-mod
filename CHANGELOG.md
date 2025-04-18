@@ -1,3 +1,12 @@
+## 🚀 [2.10.7] - 18/04/2025
+
+### 🔄 Enhancements
+
+- Fix origin_request_policies
+- Add origin_request_policies to CloudFront distribution configuration
+
+---
+
 ## 🚀 [2.10.6] - 18/04/2025
 
 ### 🔄 Enhancements
