@@ -11,6 +11,45 @@ resource "aws_cloudfront_origin_access_identity" "main" {
   comment = local.prefixed_name
 }
 
+resource "aws_cloudfront_cache_policy" "main" {
+  for_each    = var.cache_policies
+  id          = "${local.prefixed_name}-${each.key}"
+  name        = each.value.name
+  min_ttl     = each.value.min_ttl
+  max_ttl     = each.value.max_ttl
+  default_ttl = each.value.default_ttl
+  comment     = each.value.comment
+  parameters_in_cache_key_and_forwarded_to_origin {
+    dynamic "cookies_config" {
+      for_each = var.cache_policies.cookies_config
+      content {
+        cookie_behavior = cookies_config.value.cookie_behavior
+        cookies {
+          items = cookies_config.value.cookies
+        }
+      }
+    }
+    dynamic "headers_config" {
+      for_each = var.cache_policies.headers_config
+      content {
+        header_behavior = headers_config.value.header_behavior
+        headers {
+          items = headers_config.value.headers
+        }
+      }
+    }
+    dynamic "query_strings_config" {
+      for_each = var.cache_policies.headers_config
+      content {
+        query_string_behavior = query_strings_config.value.query_strings_behavior
+        query_strings {
+          items = query_strings_config.value.query_strings
+        }
+      }
+    }
+  }
+}
+
 resource "aws_cloudfront_origin_access_control" "main" {
   for_each                          = var.origin_access_controls
   name                              = "${local.prefixed_name}-${each.key}"
@@ -21,6 +60,9 @@ resource "aws_cloudfront_origin_access_control" "main" {
 }
 
 resource "aws_cloudfront_distribution" "main" {
+  depends_on = [
+    aws_cloudfront_cache_policy.main
+  ]
   enabled             = true
   is_ipv6_enabled     = true
   comment             = var.description
@@ -66,13 +108,14 @@ resource "aws_cloudfront_distribution" "main" {
     cached_methods   = var.default_cache_behavior.cached_methods
     target_origin_id = var.default_cache_behavior.target_origin_id
 
-    forwarded_values {
-      query_string = var.default_cache_behavior.forward_query_string
-
-      cookies {
-        forward = var.default_cache_behavior.forward_cookies
-      }
-    }
+    cache_policy_id = aws_cloudfront_cache_policy.main[var.default_cache_behavior.cache_policy_id].id
+    # forwarded_values {
+    #   query_string = var.default_cache_behavior.forward_query_string
+    #
+    #   cookies {
+    #     forward = var.default_cache_behavior.forward_cookies
+    #   }
+    # }
 
     viewer_protocol_policy = var.default_cache_behavior.viewer_protocol_policy
     min_ttl                = var.default_cache_behavior.min_ttl

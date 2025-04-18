@@ -12,6 +12,6 @@ module "cloudfront" {
   origin_access_controls  = each.value.origin_access_controls
   custom_error_responses  = each.value.custom_error_responses
   ordered_cache_behaviors = each.value.ordered_cache_behaviors
-
-  tags = each.value.tags
+  cache_policies          = each.value.cache_policies
+  tags                    = each.value.tags
 }
