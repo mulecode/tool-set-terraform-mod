@@ -99,13 +99,6 @@ resource "aws_cloudfront_distribution" "main" {
     target_origin_id = var.default_cache_behavior.target_origin_id
 
     cache_policy_id = aws_cloudfront_cache_policy.main[var.default_cache_behavior.cache_policy_id].id
-    # forwarded_values {
-    #   query_string = var.default_cache_behavior.forward_query_string
-    #
-    #   cookies {
-    #     forward = var.default_cache_behavior.forward_cookies
-    #   }
-    # }
 
     viewer_protocol_policy = var.default_cache_behavior.viewer_protocol_policy
     min_ttl                = var.default_cache_behavior.min_ttl
@@ -139,7 +132,7 @@ resource "aws_cloudfront_distribution" "main" {
       path_pattern           = ordered_cache_behavior.value.path_pattern
       allowed_methods        = ordered_cache_behavior.value.allowed_methods
       cached_methods         = ordered_cache_behavior.value.cached_methods
-      cache_policy_id        = ordered_cache_behavior.value.cache_policy_id
+      cache_policy_id        = aws_cloudfront_cache_policy.main[ordered_cache_behavior.value.cache_policy_id].id
       target_origin_id       = ordered_cache_behavior.key
       viewer_protocol_policy = ordered_cache_behavior.value.viewer_protocol_policy
 
