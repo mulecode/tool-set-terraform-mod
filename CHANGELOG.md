@@ -1,4 +1,12 @@
-## 🚀 [2.9.5] - 15/04/2025
+## 🚀 [2.10.1] - 15/04/2025
+
+### 🛠️ Fixes
+
+- Fixing invalid key for cloudfront distribution module
+
+---
+
+## 🚀 [2.10.0] - 15/04/2025
 
 ### 🔄 Enhancements
 
