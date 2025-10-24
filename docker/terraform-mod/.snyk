@@ -1,36 +1,9 @@
 # .snyk
 # https://docs.snyk.io/snyk-cli/commands/ignore
+# Example ignore rule:
+# ignore:
+#   SNYK-GOLANG-GITHUBCOMHASHICORPCONSULAPI-8310963:
+#     - '*':
+#         reason: "Wont affect the project"
+#         expires: "2025-12-31T23:59:59Z"
 
-ignore:
-  SNYK-GOLANG-GITHUBCOMHASHICORPCONSULAPI-8310963:
-    - '*':
-        reason: "Wont affect the project"
-        expires: "2025-12-31T23:59:59Z"
-  SNYK-GOLANG-GITHUBCOMHASHICORPCONSULAPI-8310965:
-    - '*':
-        reason: "Wont affect the project"
-        expires: "2025-12-31T23:59:59Z"
-  SNYK-GOLANG-GITHUBCOMGOLANGJWTJWTV4-8341242:
-    - '*':
-        reason: "Wont affect the project"
-        expires: "2025-12-31T23:59:59Z"
-  SNYK-GOLANG-K8SIOAPIMACHINERYPKGUTILRUNTIME-8367153:
-    - '*':
-        reason: "Wont affect the project"
-        expires: "2025-12-31T23:59:59Z"
-  SNYK-GOLANG-GOLANGORGXNETHTML-8535262:
-    - '*':
-        reason: "Wont affect the project"
-        expires: "2025-12-31T23:59:59Z"
-  SNYK-GOLANG-GOLANGORGXCRYPTOSSH-8496611:
-    - '*':
-        reason: "Wont affect the project"
-        expires: "2025-12-31T23:59:59Z"
-  SNYK-GOLANG-GOLANGORGXNETHTML-9572088:
-    - '*':
-        reason: "Wont affect the project"
-        expires: "2025-12-31T23:59:59Z"
-  SNYK-GOLANG-GITHUBCOMHASHICORPCONSULAPI-8602118:
-    - '*':
-        reason: "Wont affect the project"
-        expires: "2025-12-31T23:59:59Z"
