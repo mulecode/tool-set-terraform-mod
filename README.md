@@ -3,7 +3,7 @@
 This repository houses Docker images equipped with tool-set-terraform-mod, designed to be versatile across
 different pipeline solutions.
 These images adhere to the [3musketeers](https://3musketeers.pages.dev) pattern, ensuring compatibility and
-promoting a standardized approach to tool usage.
+promoting a standardised approach to tool usage.
 
 ## Why use docker for pipelines?
 
@@ -119,14 +119,14 @@ Check for more patterns at [3musketeers](https://3musketeers.pages.dev)
 
 | Name | Version |
 |------|---------|
-| <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | ~> 1.11.4 |
-| <a name="requirement_aws"></a> [aws](#requirement\_aws) | ~> 5.94.1 |
+| <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | ~> 1.13.4 |
+| <a name="requirement_aws"></a> [aws](#requirement\_aws) | ~> 6.0 |
 
 ## Providers
 
 | Name | Version |
 |------|---------|
-| <a name="provider_aws"></a> [aws](#provider\_aws) | ~> 5.94.1 |
+| <a name="provider_aws"></a> [aws](#provider\_aws) | ~> 6.0 |
 
 ## Modules
 
