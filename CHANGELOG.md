@@ -1,3 +1,13 @@
+## 🚀 [2.10.8] - 24/10/2025
+
+### 🔄 Enhancements
+
+- Update terraform module to 1.13.4
+- Update required terraform version to ~> ~> 1.13.4
+- Update required AWS provider to ~> 6
+
+---
+
 ## 🚀 [2.10.7] - 18/04/2025
 
 ### 🔄 Enhancements
