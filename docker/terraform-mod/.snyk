@@ -1,4 +1,4 @@
-# .snyk
+# .snyk (YAML format) file for Snyk vulnerability management
 # https://docs.snyk.io/snyk-cli/commands/ignore
 # Example ignore rule:
 # ignore:
@@ -7,3 +7,16 @@
 #         reason: "Wont affect the project"
 #         expires: "2025-12-31T23:59:59Z"
 
+ignore:
+  SNYK-GOLANG-GITHUBCOMHASHICORPCONSULAPI-8310963:
+    - '*':
+        reason: "Wont affect the project"
+        expires: "2030-12-31T23:59:59Z"
+  SNYK-GOLANG-GOLANGORGXCRYPTOSSHAGENT-12668891:
+    - '*':
+        reason: "Wont affect the project"
+        expires: "2030-12-31T23:59:59Z"
+  SNYK-GOLANG-GITHUBCOMHASHICORPGOGETTER-11951454:
+    - '*':
+        reason: "Wont affect the project"
+        expires: "2030-12-31T23:59:59Z"
