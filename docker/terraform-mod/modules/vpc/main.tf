@@ -74,9 +74,8 @@ resource "aws_subnet" "set" {
 
 # ----------------- NAT (per-AZ in nat_host_set) -----------------
 resource "aws_eip" "nat" {
-  for_each = (var.nat_host_set != null && local.nat_required)
-    ? { for k, v in aws_subnet.set : k => v if split(":", k)[0] == var.nat_host_set }
-    : {}
+  for_each = (var.nat_host_set != null && local.nat_required) ? { for k, v in aws_subnet.set : k => v if split(":", k)[0] == var.nat_host_set } : {}
+
   domain = "vpc"
   tags = merge(
     {
@@ -87,9 +86,8 @@ resource "aws_eip" "nat" {
 }
 
 resource "aws_nat_gateway" "nat" {
-  for_each          = (var.nat_host_set != null && local.nat_required)
-    ? { for k, v in aws_subnet.set : k => v if split(":", k)[0] == var.nat_host_set }
-    : {}
+  for_each = (var.nat_host_set != null && local.nat_required) ? { for k, v in aws_subnet.set : k => v if split(":", k)[0] == var.nat_host_set } : {}
+
   allocation_id     = aws_eip.nat[each.key].id
   subnet_id         = aws_subnet.set[each.key].id
   connectivity_type = "public"
@@ -121,28 +119,23 @@ resource "aws_route" "default" {
   for_each = {
     for k, s in aws_subnet.set :
     k => s
-    if (
-    var.set_attributes[split(":", k)[0]].egress_via == "igw" ||
-    var.set_attributes[split(":", k)[0]].egress_via == "nat"
+    if(
+      var.set_attributes[split(":", k)[0]].egress_via == "igw" ||
+      var.set_attributes[split(":", k)[0]].egress_via == "nat"
     )
   }
 
   route_table_id         = aws_route_table.set[each.key].id
   destination_cidr_block = "0.0.0.0/0"
 
-  gateway_id = var.set_attributes[split(":", each.key)[0]].egress_via == "igw"
-    ? one(aws_internet_gateway.igw[*].id)
-    : null
-
-  nat_gateway_id = var.set_attributes[split(":", each.key)[0]].egress_via == "nat"
-    ? aws_nat_gateway.nat["${var.nat_host_set}:${index(local.azs, each.value.availability_zone)}"].id
-    : null
+  gateway_id     = var.set_attributes[split(":", each.key)[0]].egress_via == "igw" ? one(aws_internet_gateway.igw[*].id) : null
+  nat_gateway_id = var.set_attributes[split(":", each.key)[0]].egress_via == "nat" ? aws_nat_gateway.nat["${var.nat_host_set}:${index(local.azs, each.value.availability_zone)}"].id : null
 
   depends_on = [aws_internet_gateway.igw, aws_nat_gateway.nat]
 }
 
 resource "aws_route_table_association" "set" {
-  for_each       = {for k, s in aws_subnet.set : k => s}
+  for_each       = { for k, s in aws_subnet.set : k => s }
   subnet_id      = each.value.id
   route_table_id = aws_route_table.set[each.key].id
 }

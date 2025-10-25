@@ -294,10 +294,10 @@ variable "aws_cognito_configs" {
 variable "aws_vpcs" {
   description = "AWS VPC configurations"
   type = map(object({
-    vpc_cidr = string
+    vpc_cidr    = string
     subnet_sets = map(list(string))
     set_attributes = map(object({
-      egress_via= string
+      egress_via              = string
       map_public_ip_on_launch = bool
     }))
     nat_host_set = optional(string, null)

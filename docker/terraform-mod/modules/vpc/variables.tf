@@ -4,27 +4,27 @@ variable "prefix" {
 }
 variable "name" {
   description = "Unique name for your VPC"
-  type = string
+  type        = string
 }
 variable "region" {
   description = "AWS region to deploy into"
-  type = string
+  type        = string
 }
 variable "vpc_cidr" {
   description = "CIDR block for the VPC"
-  type = string
+  type        = string
 }
 # Map of set_name => list of CIDRs (length per set == number of AZs you’ll use)
 variable "subnet_sets" {
   description = "Generic map of subnet sets to CIDR lists."
-  type = map(list(string))
+  type        = map(list(string))
 }
 
 # Map of set_name => attributes controlling routing/behaviour
 # egress_via: "igw" | "nat" | "none"
 variable "set_attributes" {
   description = "Behaviour per set."
-  type        = map(object({
+  type = map(object({
     egress_via              = string
     map_public_ip_on_launch = bool
   }))
