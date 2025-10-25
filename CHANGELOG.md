@@ -1,3 +1,11 @@
+## 🚀 [2.11.0] - 25/10/2025
+
+### ✅ New Features
+
+- Add vpc module
+
+---
+
 ## 🚀 [2.10.8] - 24/10/2025
 
 ### 🔄 Enhancements

@@ -136,6 +136,7 @@ Check for more patterns at [3musketeers](https://3musketeers.pages.dev)
 | <a name="module_aws_aim_role"></a> [aws\_aim\_role](#module\_aws\_aim\_role) | ./modules/iam-role | n/a |
 | <a name="module_aws_api_gateway_rest"></a> [aws\_api\_gateway\_rest](#module\_aws\_api\_gateway\_rest) | ./modules/api-gateway-rest | n/a |
 | <a name="module_aws_dynamodb_table"></a> [aws\_dynamodb\_table](#module\_aws\_dynamodb\_table) | ./modules/dynamo-db | n/a |
+| <a name="module_aws_vpc"></a> [aws\_vpc](#module\_aws\_vpc) | ./modules/vpc | n/a |
 | <a name="module_bucket"></a> [bucket](#module\_bucket) | ./modules/bucket | n/a |
 | <a name="module_bucket_policy"></a> [bucket\_policy](#module\_bucket\_policy) | ./modules/bucket-policy | n/a |
 | <a name="module_cloudfront"></a> [cloudfront](#module\_cloudfront) | ./modules/cloudfront | n/a |
@@ -163,6 +164,7 @@ Check for more patterns at [3musketeers](https://3musketeers.pages.dev)
 | <a name="input_aws_s3_bucket_policies"></a> [aws\_s3\_bucket\_policies](#input\_aws\_s3\_bucket\_policies) | AWS S3 bucket policy configurations | <pre>map(object({<br/>    policy      = string<br/>    policy_vars = optional(map(string), {})<br/>  }))</pre> | `{}` | no |
 | <a name="input_aws_s3_buckets"></a> [aws\_s3\_buckets](#input\_aws\_s3\_buckets) | AWS S3 bucket configurations | <pre>map(object({<br/>    acl        = optional(string, "private")<br/>    versioning = optional(string, "Disabled")<br/>    tags       = optional(map(string), {})<br/>  }))</pre> | `{}` | no |
 | <a name="input_aws_s3_buckets_put_files"></a> [aws\_s3\_buckets\_put\_files](#input\_aws\_s3\_buckets\_put\_files) | AWS S3 bucket put files configurations | <pre>map(object({<br/>    folder_path = string<br/>    tags        = optional(map(string), {})<br/>  }))</pre> | `{}` | no |
+| <a name="input_aws_vpcs"></a> [aws\_vpcs](#input\_aws\_vpcs) | AWS VPC configurations | <pre>map(object({<br/>    vpc_cidr = string<br/>    subnet_sets = map(list(string))<br/>    set_attributes = map(object({<br/>      egress_via= string<br/>      map_public_ip_on_launch = bool<br/>    }))<br/>    nat_host_set = optional(string, null)<br/>    tags         = optional(map(string), {})<br/>  }))</pre> | `{}` | no |
 | <a name="input_project_prefix"></a> [project\_prefix](#input\_project\_prefix) | Project prefix - prefix for all resources | `string` | n/a | yes |
 | <a name="input_region"></a> [region](#input\_region) | AWS Region value | `string` | n/a | yes |
 
